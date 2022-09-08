@@ -76,16 +76,16 @@ function handleDeleteCourse(id){
         })
 }
 
-function updateCourse(data){
+function updateCourse(data, callback){
     var options = {
-        method: "POST",
+        method: "PUT",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     };
 
-    fetch(courseApi,options)
+    fetch(courseApi + '/' + data.id,options)
         .then(function(response){
             return response.json();
         })
@@ -122,8 +122,8 @@ function handleCreate(){
 }
 
 function handleUpdateCourse(id){
-    var updatebtn = document.querySelector('#update_course');
-    updatebtn.onclick=function(){
+    //var updatebtn = document.querySelector('#update_course');
+   // updatebtn.onclick=function(){
         var name = document.querySelector('input[name = "name"]').value;
         var description = document.querySelector('input[name = "description"]').value;
         var data = {
@@ -132,5 +132,5 @@ function handleUpdateCourse(id){
             id: id
         }
         updateCourse(data, ()=> {getCourses(renderCourses)});
-    }
 }
+
